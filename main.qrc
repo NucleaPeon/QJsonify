@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/filespecs">
+        <file>menu_defs.json</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>icons/align-horizontal-bottom-out.png</file>
+        <file>icons/align-horizontal-center.png</file>
+        <file>icons/align-horizontal-left-out.png</file>
+        <file>icons/align-horizontal-left.png</file>
+        <file>icons/align-horizontal-right-out.png</file>
+        <file>icons/align-horizontal-right.png</file>
+        <file>icons/align-horizontal-top-out.png</file>
+        <file>icons/align-vertical-bottom.png</file>
+        <file>icons/align-vertical-center.png</file>
+        <file>icons/align-vertical-top.png</file>
+        <file>icons/application-x-font-ttf.png</file>
+        <file>icons/chronometer.png</file>
+        <file>icons/dialog-close.png</file>
+        <file>icons/document-close.png</file>
+        <file>icons/document-new.png</file>
+        <file>icons/document-open.png</file>
+        <file>icons/document-print.png</file>
+        <file>icons/document-save-as.png</file>
+        <file>icons/document-save.png</file>
+        <file>icons/draw-text.png</file>
+        <file>icons/fill-color.png</file>
+        <file>icons/format-stroke-color.png</file>
+        <file>icons/format-text-bold.png</file>
+        <file>icons/format-text-italic.png</file>
+        <file>icons/format-text-strikethrough.png</file>
+        <file>icons/format-text-subscript.png</file>
+        <file>icons/format-text-superscript.png</file>
+        <file>icons/format-text-underline.png</file>
+        <file>icons/go-bottom.png</file>
+        <file>icons/go-down.png</file>
+        <file>icons/go-top.png</file>
+        <file>icons/go-up.png</file>
+        <file>icons/speaker.png</file>
+        <file>icons/view-presentation.png</file>
+        <file>icons/view-preview.png</file>
+        <file>icons/window-close.png</file>
+        <file>icons/zoom-in.png</file>
+        <file>icons/zoom-original.png</file>
+        <file>icons/zoom-out.png</file>
+    </qresource>
+</RCC>

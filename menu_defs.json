@@ -1,0 +1,62 @@
+[
+    {
+        "name": "&File",
+        "actions": [
+            {
+                "name": "open",
+                "text": "&Open",
+                "icon": ":/icons/document-open.png",
+                "slot": "openUrl()"
+            },
+            {
+                "name": "save",
+                "text": "&Save",
+                "toolbar_hidden": "true",
+                "icon": ":/icons/document-save.png"
+            },
+            {
+                "name": "save-as",
+                "text": "Save &As",
+                "icon": ":/icons/document-save-as.png"
+            },
+            {
+                "separator": "true"
+            },
+            {
+                "name": "print",
+                "text": "&Print",
+                "toolbar_hidden": "true",
+                "icon": ":/icons/document-print.png"
+            },
+            {
+                "name": "exit",
+                "text": "&Quit",
+                "toolbar_hidden": "true",
+                "icon": ":/icons/dialog-close.png",
+                "slot": "close()",
+                "comment": "This will be applied to mac osx application menu automatically."
+            }
+        ]
+    },
+    {
+        "name": "&Edit",
+        "actions": []
+    },
+    {
+        "name": "&View",
+        "actions": []
+
+    },
+    {
+        "name": "&Tool",
+        "actions": []
+    },
+    {
+        "name": "&Format",
+        "actions": []
+    },
+    {
+        "name": "&Help",
+        "actions": []
+    }
+]
