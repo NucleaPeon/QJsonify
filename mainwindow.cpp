@@ -1,18 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QDebug>
-
 /*!
  * TODO:
  *      [ ] Implement the multiplatform toolbar mechanism here:
  *          [ ] Recent files
- *          [ ] Open Print | Edit | Minify Prettify | Export
- *          [ ] On application focus, check if loaded file has been modified if local and reload it. To do so on remote requires setting option in preferences.
- *          [ ] QJsonParseError should show messages in status bar
- *          [ ] Impl help and preferences modals
- *          [ ] Create icons
- *          [ ] Build for OS X
+ *          [ ] Remote loading and exporting of files
  *          [ ] Use CMake instead of qmake
  *          [ ] Upload to github
  *          [ ] Debian package
@@ -69,7 +62,6 @@ void MainWindow::openAbout()
 
 void MainWindow::openPrintDialog(const QString outputName)
 {
-    qDebug() << "open Print dialog";
     if (ui->textInput->document()->characterCount() < 2)
         return;
 
@@ -135,7 +127,6 @@ void MainWindow::loadInputFile(QUrl input)
         }
         in.close();
     } else {
-        qDebug() << "TODO: Remote file reading";
     }
 
 }

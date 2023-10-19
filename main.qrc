@@ -45,5 +45,7 @@
         <file>icons/format-line-spacing-normal.png</file>
         <file>icons/format-line-spacing-triple.png</file>
         <file>icons/document-export.png</file>
+        <file>icons/qjsonify-128x128.png</file>
+        <file>icons/qjsonify-64x64.png</file>
     </qresource>
 </RCC>
