@@ -10,7 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = QJsonify
 TEMPLATE = app
-
+ICON += $$PWD/icons/qjsonify.icns
+QMAKE_INFO_PLIST = Info.plist
 
 SOURCES += main.cpp\
         mainwindow.cpp\
