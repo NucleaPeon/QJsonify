@@ -12,10 +12,13 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include <QMap>
 
 #ifdef Q_OS_MAC
 #include <QMacToolBar>
 #include <QMacToolBarItem>
+#else
+#include <QToolBar>
 #endif
 
 /*!
@@ -41,19 +44,35 @@ public:
     static bool loadFile();
     static void setupToolBarOn(QWidget *widget = 0, QObject *slotobj = 0);
 
+    /*!
+     * \brief actionByName Retrieves a QAction based on name defined in the menu_defs.json
+     * \param name QString
+     * \return QAction* or NULL if not found
+     */
+    static QAction* actionByName(const QString name);
 
-    static void setupMenus(QWidget *widget);
+    static QMenuBar *setupMenus(QWidget *widget);
     static void setupWindowsToolBar(QWidget *widget, QObject *slotobj);
     static void setupNixToolBar(QWidget *widget, QObject *slotobj);
 #ifdef Q_OS_MAC
-    static void setupOSXToolBar(QWidget *widget, QObject *slotobj);
+    static QMacToolBar* setupOSXToolBar(QWidget *widget, QObject *slotobj);
+    static QMacToolBarItem* toolBarItemByText(QString text);
+#else
+    static QAction* toolBarItemByText(QString text);
 #endif
 
 private:
     static void handleSignalSlot(QObject *connector, const char *signal, QObject *caller, const char *slot);
 };
 
-static bool slideEditorMenuLoaded;
-static QJsonDocument slideEditorMenuDoc;
+static bool _loaded;
+static QJsonDocument _json;
+static QMap<QString, QAction*> _action_map;
+static QMenuBar* mb;
+#ifdef Q_OS_MAC
+static QMacToolBar *tb;
+#else
+static QToolBar *tb;
+#endif
 
 #endif // LOADMENU_H

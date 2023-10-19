@@ -10,54 +10,66 @@
                 "slot": "openUrl()"
             },
             {
-                "name": "save",
-                "text": "&Save",
-                "toolbar_hidden": "true",
-                "icon": ":/icons/document-save.png"
-            },
-            {
-                "name": "save-as",
-                "text": "Save &As",
-                "icon": ":/icons/document-save-as.png"
-            },
-            {
-                "separator": "true"
-            },
-            {
                 "name": "print",
                 "text": "&Print",
-                "toolbar_hidden": "true",
-                "icon": ":/icons/document-print.png"
+                "icon": ":/icons/document-print.png",
+                "shortcut": "Ctrl+P",
+                "slot": "openPrintDialog()"
             },
             {
                 "name": "exit",
                 "text": "&Quit",
-                "toolbar_hidden": "true",
+                "toolbar_hidden": true,
                 "icon": ":/icons/dialog-close.png",
                 "slot": "close()",
                 "comment": "This will be applied to mac osx application menu automatically."
+            },
+            {
+                "separator": true
             }
         ]
     },
     {
-        "name": "&Edit",
-        "actions": []
-    },
-    {
-        "name": "&View",
-        "actions": []
+        "name": "&Actions",
+        "actions": [
+            {
+                "name": "minify",
+                "text": "&Minify",
+                "enabled": false,
+                "icon": ":/icons/format-line-spacing-normal.png",
+                "shortcut": "Ctrl+M",
+                "slot": "minifyJson()"
+            },
+            {
+                "name": "prettify",
+                "text": "&Prettify",
+                "enabled": false,
+                "shortcut": "Ctrl+Y",
+                "icon": ":/icons/format-line-spacing-triple.png",
+                "slot": "prettifyJson()"
+            },
+            {
+                "separator": true
+            },
+            {
+                "name": "export",
+                "text": "&Export",
+                "enabled": false,
+                "icon": ":/icons/document-export.png",
+                "slot": "exportJson()"
+            }
 
-    },
-    {
-        "name": "&Tool",
-        "actions": []
-    },
-    {
-        "name": "&Format",
-        "actions": []
+        ]
     },
     {
         "name": "&Help",
-        "actions": []
+        "actions": [
+            {
+                "name": "about",
+                "text": "&About",
+                "toolbar_hidden": true,
+                "slot": "openAbout()"
+            }
+        ]
     }
 ]

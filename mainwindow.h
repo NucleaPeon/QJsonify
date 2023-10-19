@@ -17,9 +17,11 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QtPrintSupport>
 
 #include "about.h"
-#include "preferences.h"
 #include "loadmenu.h"
 
 namespace Ui {
@@ -36,6 +38,11 @@ public:
 
 private slots:
     void openUrl();
+    void openAbout();
+    void openPrintDialog(const QString outputName = "output.pdf");
+    void minifyJson();
+    void prettifyJson();
+    void exportJson();
 
 private:
     Ui::MainWindow *ui;
@@ -43,13 +50,13 @@ private:
     QAction *preferencesAction;
     QAction *fileOpen;
     About *aboutWindow;
-    Preferences *preferencesWindow;
     QStatusBar *statusBar;
 
     void loadInputFile(QUrl input);
+    void exportFile(QUrl output);
 
-    QUrl *openedFile;
-    QUrl *defaultLocation;
+    QUrl openedUrl;
+    QUrl defaultLocation;
 
 };
 

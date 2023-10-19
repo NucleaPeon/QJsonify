@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,12 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp\
         about.cpp\
-        preferences.cpp\
         loadmenu.cpp
 
 HEADERS  += mainwindow.h\
         about.h\
-        preferences.h\
         loadmenu.h
 
 macx { 
@@ -36,8 +34,7 @@ macx {
 
 
 FORMS    += mainwindow.ui\
-        about.ui\
-        preferences.ui
+        about.ui
 
 RESOURCES += \
     main.qrc
