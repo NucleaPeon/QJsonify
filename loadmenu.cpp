@@ -57,6 +57,10 @@ void LoadMenu::setupMenus(QWidget *widget)
                     act->setCheckable(true);
                     act->setChecked(bool(actobj.value("checked").toString()=="true"));
                 }
+                const QString sc = QObject::tr(actobj.value("shortcut").toString().toLatin1().data());
+                if (! sc.isNull() && ! sc.isEmpty()) {
+                    act->setShortcut(QKeySequence::fromString(sc));
+                }
                 m->addAction(act);
                 if (actobj.contains("slot")) {
                     QString slot = actobj.value("slot").toString();

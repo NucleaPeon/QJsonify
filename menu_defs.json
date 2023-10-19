@@ -6,6 +6,7 @@
                 "name": "open",
                 "text": "&Open",
                 "icon": ":/icons/document-open.png",
+                "shortcut": "Ctrl+O",
                 "slot": "openUrl()"
             },
             {
