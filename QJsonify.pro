@@ -38,3 +38,6 @@ FORMS    += mainwindow.ui\
 
 RESOURCES += \
     main.qrc
+
+OTHER_FILES += \
+    LICENSE

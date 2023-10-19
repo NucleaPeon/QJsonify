@@ -42,7 +42,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="main.qrc">:/icons/qjsonify-64x64.png</pixmap>
+             <pixmap resource="main.qrc">:/icons/qjsonify-128x128.png</pixmap>
             </property>
            </widget>
           </item>
@@ -133,7 +133,7 @@
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>Copyright 2023 Daniel Kettle. All rights reserved.</string>
+           <string>Copyright 2023 Daniel Kettle &lt;initial.dann@gmail.com&gt;</string>
           </property>
          </widget>
         </item>

@@ -1,5 +1,4 @@
 #include "loadmenu.h"
-#include <QDebug>
 
 LoadMenu::LoadMenu()
 {
@@ -26,7 +25,6 @@ bool LoadMenu::loadFile()
 
 void LoadMenu::setupToolBarOn(QWidget *widget, QObject *slotobj)
 {
-    qDebug() << widget;
     _action_map = QMap<QString, QAction*>();
     if (_loaded == false)
         LoadMenu::loadFile();
@@ -41,7 +39,6 @@ void LoadMenu::setupToolBarOn(QWidget *widget, QObject *slotobj)
 
 QAction *LoadMenu::actionByName(const QString name)
 {
-    qDebug() << "action loading" << name << _action_map.value(name, NULL);
     return _action_map.value(name, NULL);
 }
 
