@@ -20,6 +20,7 @@
                 "name": "exit",
                 "text": "&Quit",
                 "toolbar_hidden": true,
+                "shortcut": "Ctrl+Q",
                 "icon": ":/icons/dialog-close.png",
                 "slot": "close()",
                 "comment": "This will be applied to mac osx application menu automatically."

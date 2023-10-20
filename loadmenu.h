@@ -1,6 +1,7 @@
 #ifndef LOADMENU_H
 #define LOADMENU_H
 
+#include <QMainWindow>
 #include <QMetaMethod>
 #include <QWidget>
 #include <QJsonDocument>
@@ -17,7 +18,14 @@
 #ifdef Q_OS_MAC
 #include <QMacToolBar>
 #include <QMacToolBarItem>
-#else
+#endif
+
+#ifdef Q_OS_WIN
+#include <QtWinExtras>
+#include <QWinThumbnailToolBar>
+#endif
+
+#ifdef Q_OS_LINUX
 #include <QToolBar>
 #endif
 
@@ -43,6 +51,7 @@ public:
 
     static bool loadFile();
     static void setupToolBarOn(QWidget *widget = 0, QObject *slotobj = 0);
+    static void setupToolBarOn(QMainWindow *window = 0, QObject *slotobj = 0);
 
     /*!
      * \brief actionByName Retrieves a QAction based on name defined in the menu_defs.json
@@ -52,8 +61,13 @@ public:
     static QAction* actionByName(const QString name);
 
     static QMenuBar *setupMenus(QWidget *widget);
-    static void setupWindowsToolBar(QWidget *widget, QObject *slotobj);
-    static void setupNixToolBar(QWidget *widget, QObject *slotobj);
+#ifdef Q_OS_WIN
+    // UNTESTED
+    static QWinThumbnailToolBar* setupWindowsToolBar(QWidget *widget, QObject *slotobj);
+#endif
+#ifdef Q_OS_LINUX
+    static QToolBar* setupNixToolBar(QWidget *widget, QObject *slotobj);
+#endif
 #ifdef Q_OS_MAC
     static QMacToolBar* setupOSXToolBar(QWidget *widget, QObject *slotobj);
     static QMacToolBarItem* toolBarItemByText(QString text);

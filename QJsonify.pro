@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui printsupport
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core widgets printsupport
 
 TARGET = QJsonify
 TEMPLATE = app
@@ -31,6 +29,11 @@ macx {
     OBJECTIVE_HEADERS += cocoainitializer.h
 
 }
+
+win32 {
+    QT += winextras
+}
+
 
 
 FORMS    += mainwindow.ui\

@@ -32,8 +32,26 @@ void LoadMenu::setupToolBarOn(QWidget *widget, QObject *slotobj)
     mb = setupMenus(widget);
 #ifdef Q_OS_MAC
     tb = setupOSXToolBar(widget, slotobj);
-#else
+#endif
+#ifdef Q_OS_LINUX
     tb = setupNixToolBar(widget, slotobj);
+#endif
+}
+
+void LoadMenu::setupToolBarOn(QMainWindow *window, QObject *slotobj)
+{
+    _action_map = QMap<QString, QAction*>();
+    if (_loaded == false)
+        LoadMenu::loadFile();
+
+   mb = setupMenus(window);
+   window->setMenuBar(mb);
+#ifdef Q_OS_MAC
+    tb = setupOSXToolBar(window->parentWidget(), slotobj);
+#endif
+#ifdef Q_OS_LINUX
+    tb = setupNixToolBar(window, slotobj);
+    window->addToolBar(tb);
 #endif
 }
 
@@ -56,48 +74,71 @@ QMenuBar* LoadMenu::setupMenus(QWidget *widget)
                 continue;
             }
             const bool has_checked = actobj.contains("checked");
-            if (actobj.value("visible_on_mac").toBool(true)) {
-                const QIcon icon = QIcon(actobj.value("icon").toString());
-                QAction *act = new QAction(icon, actobj.value("text").toString(), m->parent());
-                act->setData(QVariant(actobj.value("name")));
+            const QIcon icon = QIcon(actobj.value("icon").toString());
+            QAction *act = new QAction(icon, actobj.value("text").toString(), m->parent());
+            act->setData(QVariant(actobj.value("name")));
 
-                if (has_checked) {
-                    act->setChecked(actobj.value("checked").toBool());
-                }
-                const QString sc = QObject::tr(actobj.value("shortcut").toString().toLatin1().data());
-                if (! sc.isNull() && ! sc.isEmpty()) {
-                    act->setShortcut(QKeySequence::fromString(sc));
-                }
-                act->setEnabled(actobj.value("enabled").toBool(true));
-                m->addAction(act);
-                if (actobj.contains("slot")) {
-                    QString slot = actobj.value("slot").toString();
-                    LoadMenu::handleSignalSlot(act, "triggered()", widget, slot.toLocal8Bit().data());
-                }
-                _action_map[actobj.value("name").toString()] = act;
+            if (has_checked) {
+                act->setChecked(actobj.value("checked").toBool());
             }
+            const QString sc = QObject::tr(actobj.value("shortcut").toString().toLatin1().data());
+            if (! sc.isNull() && ! sc.isEmpty()) {
+                act->setShortcut(QKeySequence::fromString(sc));
+            }
+            act->setEnabled(actobj.value("enabled").toBool(true));
+            m->addAction(act);
+            if (actobj.contains("slot")) {
+                QString slot = actobj.value("slot").toString();
+                LoadMenu::handleSignalSlot(act, "triggered()", widget, slot.toLocal8Bit().data());
+            }
+            _action_map[actobj.value("name").toString()] = act;
+
         }
 
         mb->addMenu(m);
     }
     return mb;
 }
-
-void LoadMenu::setupWindowsToolBar(QWidget *widget, QObject *slotobj)
+#ifdef Q_OS_WIN
+QWinThumbnailToolBar* LoadMenu::setupWindowsToolBar(QWidget *widget, QObject *slotobj)
 {
     QJsonArray arr = _json.array();
     foreach(QJsonValue val, arr) {
         qWarning("TODO: Windows Ribbon Toolbar");
     }
 }
-
-void LoadMenu::setupNixToolBar(QWidget *widget, QObject *slotobj)
+#endif
+#ifdef Q_OS_LINUX
+QToolBar* LoadMenu::setupNixToolBar(QWidget *widget, QObject *slotobj)
 {
     QJsonArray arr = _json.array();
+    QToolBar *tb = new QToolBar(widget);
+
     foreach(QJsonValue val, arr) {
-        qWarning("TODO: Nix Tool Bar");
+        // QActions already set up and configured
+        QJsonObject obj = val.toObject();
+        foreach(QJsonValue actval, obj.value("actions").toArray()) {
+            QJsonObject actobj = actval.toObject();
+            bool toolbar_hidden = actobj.value("toolbar_hidden").toBool(false);
+            if (actobj.contains("separator") && ! toolbar_hidden) {
+                tb->addSeparator();
+                continue;
+            }
+            const QString name = actobj.value("name").toString();
+            QAction *act = _action_map.value(name, NULL);
+            if (act != NULL) {
+                // Just don't add. As long as OS X is working, or until we impl our own toolbar visibility ui widget,
+                // they can use the menus.
+                if (toolbar_hidden) { continue; }
+                tb->addAction(act);
+            }
+
+        }
     }
+    return tb;
 }
+#endif
+
 #ifdef Q_OS_MAC
 QMacToolBar* LoadMenu::setupOSXToolBar(QWidget *widget, QObject *slotobj)
 {

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QtGlobal>
 
 /*!
  * TODO:
@@ -23,8 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
     this->aboutAction->setMenuRole(QAction::AboutRole);
     this->aboutWindow = new About();
     ui->setupUi(this);
+#if QT_VERSION > QT_VERSION_CHECK(5, 3, 3)
+    ui->textInput->setTabStopDistance(ui->textInput->tabStopDistance()/2);
+    ui->textOutput->setTabStopDistance(ui->textOutput->tabStopDistance()/2);
+#else
     ui->textInput->setTabStopWidth(ui->textInput->tabStopWidth()/2);
     ui->textOutput->setTabStopWidth(ui->textOutput->tabStopWidth()/2);
+#endif
     this->defaultLocation = QUrl(QDir::homePath());
     LoadMenu::setupToolBarOn(this, this);
     connect(this->aboutAction, SIGNAL(triggered()), this->aboutWindow, SLOT(show()));
@@ -68,12 +74,12 @@ void MainWindow::openPrintDialog(const QString outputName)
     QPrintDialog printDialog;
     if (printDialog.exec() == QDialog::Accepted) {
         QPrinter *printer = printDialog.printer();
-        printer->setResolution(QPrinter::HighResolution);
-        printer->setColorMode(QPrinter::GrayScale);
-        printer->setOutputFormat(QPrinter::NativeFormat);
+        // printer->setResolution(QPrinter::HighResolution);
+        // printer->setColorMode(QPrinter::GrayScale);
+        // printer->setOutputFormat(QPrinter::NativeFormat);
         //printer->setOutputFileName(outputName);
         ui->textOutput->document()->print(printer);
-        printDialog.done(QDialog::Accepted);
+        //printDialog.done(QDialog::Accepted);
     }
 }
 
