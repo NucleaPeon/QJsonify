@@ -71,6 +71,16 @@ QJsonify is a project that aims to help developers keep their data local. There 
 
 It's faster and more secure, you can toggle quickly between minified and prettified forms as well as print and export said json files in a couple clicks.
 
+This project includes Oxygen Icons <a href="https://techbase.kde.org/Projects/Oxygen/Licensing">https://techbase.kde.org/Projects/Oxygen/Licensing</a> which are licensed under the LGPL v3 (see LICENSE-LGPL3 file). All files under this license are located in the ``icons/`` directory except jsonify-* files which I created for the program logo. These also can be licensed under the LGPL v3.
+
+The oxygen repo is old when checked out, some svg/svgz files may not be available for inclusion with the project. Latest commit is ``bff159d338fe08be09146a5ee17b9b6efa8a2c8d``. See https://github.com/KDE/oxygen-icons for latest repo commits.
+
+Files not included:
+
+* format-line-spacing-normal.svg*
+* format-line-spacing-triple.svg*
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -102,8 +112,6 @@ You will need:
 
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 * For linux:
 
@@ -144,6 +152,7 @@ I recommend calling ``make`` with the option ``-jN`` where ``N`` is the number o
 <!-- ROADMAP -->
 ## Roadmap
 
+- [ ] Remote file read and write
 - [ ] Compile for, and add Windows 7 binary
 - [ ] Implement Recent Files menu and have ability to clear it
 - [ ] Use CMake as the build system instead of qmake
@@ -186,10 +195,11 @@ You can email me at <initial.dann@gmail.com>.
 
 [https://github.com/NucleaPeon](https://github.com/NucleaPeon)
 
+Thanks to the <a href="https://github.com/othneildrew/Best-README-Template">https://github.com/othneildrew/Best-README-Template</a> project for helping me get started on this README.md.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [product-screenshot-linux]: images/qjsonify-linux.png
 [product-screenshot-osx]: images/qjsonify-osx.png
-[readme-based-on]: https://github.com/othneildrew/Best-README-Template
