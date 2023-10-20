@@ -47,7 +47,7 @@ void LoadMenu::setupToolBarOn(QMainWindow *window, QObject *slotobj)
    mb = setupMenus(window);
    window->setMenuBar(mb);
 #ifdef Q_OS_MAC
-    tb = setupOSXToolBar(window->parentWidget(), slotobj);
+    tb = setupOSXToolBar(window, slotobj);
 #endif
 #ifdef Q_OS_LINUX
     tb = setupNixToolBar(window, slotobj);
