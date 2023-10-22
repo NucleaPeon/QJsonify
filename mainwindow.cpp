@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtGlobal>
-#include <QDebug>
 /*!
  * TODO:
  *      [ ] Implement the multiplatform toolbar mechanism here:
@@ -104,7 +103,6 @@ void MainWindow::exportJson()
     if (ui->textInput->document()->characterCount() < 2)
         return;
     QUrl url = QFileDialog::getSaveFileUrl(0, "Export JSON File", this->openedUrl.path(), "*.json");
-    qDebug() << "url" << url;
     if (url.isEmpty())
         return;
     QString inputPath = url.path(); // This will have to be changed when we detect remote files
@@ -127,7 +125,6 @@ void MainWindow::loadInputFile(QUrl input)
     QFileInfo info = QFileInfo(inputPath);
     if (input.isLocalFile()) {
         QFile in(inputPath);
-        qDebug() << "Readable: " <<  in.isReadable() << info.absoluteFilePath() << info.exists();
         if (in.open(QIODevice::ReadOnly | QIODevice::Text)) {
             QJsonParseError err;
             QByteArray arr = in.readAll();
