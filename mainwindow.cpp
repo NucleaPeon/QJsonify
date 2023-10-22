@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtGlobal>
+#include <QDebug>
 
 /*!
  * TODO:
@@ -20,11 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QString title = QString("%1 %2").arg(qApp->applicationName()).arg(qApp->applicationVersion());
+    qDebug() << title;
 	this->aboutAction = new QAction(0);
     this->aboutAction->setMenuRole(QAction::AboutRole);
     this->aboutWindow = new About();
     ui->setupUi(this);
-#if QT_VERSION > QT_VERSION_CHECK(5, 3, 3)
+    this->setWindowTitle(title);
+    // Unsure if 5.4.0 is when this method name changed, so let's add it into version 5.3.3.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     ui->textInput->setTabStopDistance(ui->textInput->tabStopDistance()/2);
     ui->textOutput->setTabStopDistance(ui->textOutput->tabStopDistance()/2);
 #else
