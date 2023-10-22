@@ -20,6 +20,7 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QtPrintSupport>
+#include <QFileInfo>
 
 #include "about.h"
 #include "loadmenu.h"

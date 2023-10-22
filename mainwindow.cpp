@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QtGlobal>
 #include <QDebug>
-
 /*!
  * TODO:
  *      [ ] Implement the multiplatform toolbar mechanism here:
@@ -22,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     QString title = QString("%1 %2").arg(qApp->applicationName()).arg(qApp->applicationVersion());
-    qDebug() << title;
 	this->aboutAction = new QAction(0);
     this->aboutAction->setMenuRole(QAction::AboutRole);
     this->aboutWindow = new About();
@@ -106,17 +104,30 @@ void MainWindow::exportJson()
     if (ui->textInput->document()->characterCount() < 2)
         return;
     QUrl url = QFileDialog::getSaveFileUrl(0, "Export JSON File", this->openedUrl.path(), "*.json");
+    qDebug() << "url" << url;
     if (url.isEmpty())
         return;
-    exportFile(url);
+    QString inputPath = url.path(); // This will have to be changed when we detect remote files
+#ifdef Q_OS_WIN
+       if (inputPath.at(0) == "/") { inputPath = inputPath.remove(0, 1); }
+#endif
+    exportFile(inputPath);
 }
 
 void MainWindow::loadInputFile(QUrl input)
 {
+    // I think there is a bug in 5.3.1 for Windows, where input.path() returns /C:/ (unix root slash prefix)
+    // So strip it out for now if at first position and look into fixing it in qt5.
+    QString inputPath = input.path();
+#ifdef Q_OS_WIN
+       if (inputPath.at(0) == "/") { inputPath = inputPath.remove(0, 1); }
+#endif
     this->statusBar->clearMessage();
     this->openedUrl = input;
+    QFileInfo info = QFileInfo(inputPath);
     if (input.isLocalFile()) {
-        QFile in(input.path());
+        QFile in(inputPath);
+        qDebug() << "Readable: " <<  in.isReadable() << info.absoluteFilePath() << info.exists();
         if (in.open(QIODevice::ReadOnly | QIODevice::Text)) {
             QJsonParseError err;
             QByteArray arr = in.readAll();
@@ -144,6 +155,10 @@ void MainWindow::loadInputFile(QUrl input)
 
 void MainWindow::exportFile(QUrl output)
 {
+    QFileInfo info(output.path());
+    if(info.completeSuffix().isEmpty()) {
+        output = QUrl(QString("%1.%2").arg(output.path(), "json"));
+    }
     QFile out(output.path());
     if (out.open(QIODevice::ReadWrite | QIODevice::Text)) {
         out.write(ui->textOutput->toPlainText().toUtf8());
