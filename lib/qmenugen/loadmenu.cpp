@@ -25,11 +25,11 @@ bool LoadMenu::loadFile(QUrl url)
     return _loaded;
 }
 
-void LoadMenu::setupToolBarOn(QUrl definition, QWidget *widget, QObject *slotobj)
+void LoadMenu::setupToolBarOn(QFile* definition, QWidget *widget, QObject *slotobj)
 {
     _action_map = QMap<QString, QAction*>();
     if (_loaded == false)
-        LoadMenu::loadFile(definition);
+        LoadMenu::loadFile(QUrl(definition->fileName()));
 
     mb = setupMenus(widget);
 #ifdef Q_OS_MAC
@@ -40,11 +40,11 @@ void LoadMenu::setupToolBarOn(QUrl definition, QWidget *widget, QObject *slotobj
 #endif
 }
 
-void LoadMenu::setupToolBarOn(QUrl definition, QMainWindow *window, QObject *slotobj)
+void LoadMenu::setupToolBarOn(QFile *definition, QMainWindow *window, QObject *slotobj)
 {
     _action_map = QMap<QString, QAction*>();
     if (_loaded == false)
-        LoadMenu::loadFile(definition);
+        LoadMenu::loadFile(QUrl(definition->fileName()));
 
    mb = setupMenus(window);
    window->setMenuBar(mb);

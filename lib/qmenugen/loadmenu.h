@@ -50,9 +50,9 @@ class LoadMenu
 public:
     LoadMenu();
 
-    static bool loadFile(QUrl url);
-    static void setupToolBarOn(QUrl definition, QWidget *widget = 0, QObject *slotobj = 0);
-    static void setupToolBarOn(QUrl definition, QMainWindow *window = 0, QObject *slotobj = 0);
+    static bool loadFile(QUrl def);
+    static void setupToolBarOn(QFile *definition, QWidget *widget = 0, QObject *slotobj = 0);
+    static void setupToolBarOn(QFile *definition, QMainWindow *window = 0, QObject *slotobj = 0);
 
     /*!
      * \brief actionByName Retrieves a QAction based on name defined in the menu_defs.json
