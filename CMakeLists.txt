@@ -54,21 +54,16 @@ QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
 list(APPEND OTHER_TARGETS
 	menu_defs.json
 )
-if (APPLE)
 
-	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+if (APPLE)
+	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns )
 	set(APP_ICON "icons/${MACOSX_BUNDLE_ICON_FILE}")
 	list(APPEND OTHER_TARGETS ${APP_ICON})
-	add_custom_target(OTHER_FILES ALL SOURCES ${OTHER_TARGETS})
+	add_custom_target(OTHER_FILES SOURCES ${OTHER_TARGETS})
+	set_property(SOURCE ${APP_ICON} PROPERTY MACOSX_PACKAGE_LOCATION
+		${MACOSX_BUNDLE_ICON_FILE})
 	file(COPY ${APP_ICON} DESTINATION
 		 ${CMAKE_CURRENT_BINARY_DIR})
-	set_source_files_properties(
-		${MACOSX_BUNDLE_ICON_FILE} PROPERTIES
-       	MACOSX_PACKAGE_LOCATION Resources
-	)
-
-
-
 	add_executable(QJsonify MACOSX_BUNDLE
 		${OTHER_FILES}
 		main.cpp
@@ -78,10 +73,31 @@ if (APPLE)
 		${QJSONIFY_RES}
 
 	)
+	target_sources(QJsonify PRIVATE
+		${OTHER_TARGETS}
+	)
+	set_source_files_properties(
+		${OTHER_TARGETS}
+		PROPERTIES
+		MACOSX_PACKAGE_LOCATION Resources/
+	)
 	set_target_properties(QJsonify PROPERTIES
-		MACOSX_BUNDLE TRUE
-		MACOSX_FRAMEWORK_IDENTIFIER org.peondevelopments.QJsonify
-		RESOURCE ${MACOSX_BUNDLE_ICON_FILE})
+		BUNDLE TRUE
+		MACOSX_BUNDLE_GUI_IDENTIFIER org.peondevelopments.QJsonify
+		MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME}
+		MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+		MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
+	)
+
+	target_link_libraries(QJsonify Qt5::MacExtras)
+	set_target_properties(QJsonify PROPERTIES LINK_FLAGS
+		 "-Wl,-F/Library/Frameworks")
+	target_link_libraries(QJsonify stdc++
+		"-framework Foundation"
+		"-framework Cocoa"
+		"-framework AppKit"
+		objc
+	)
 else()
 	add_executable(QJsonify
 		main.cpp
@@ -94,10 +110,6 @@ else()
 endif()
 target_link_libraries(QJsonify Qt5::Widgets Qt5::PrintSupport )
 
-if (APPLE)
-	target_link_libraries(QJsonify Qt5::MacExtras)
-	set_target_properties(QJsonify PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
-	target_link_libraries(QJsonify stdc++ "-framework Foundation" "-framework Cocoa" "-framework AppKit" objc)
-elseif(MSVC)
+if(MSVC)
 	target_link_libraries(QJsonify Qt5::WinExtras)
 endif()
