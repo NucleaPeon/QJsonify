@@ -32,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->textOutput->setTabStopWidth(ui->textOutput->tabStopWidth()/2);
 #endif
     this->defaultLocation = QUrl(QDir::homePath());
-
     QFile def(":/filespecs/menu_defs.json");
     LoadMenu::setupToolBarOn(&def, this, this);
     connect(this->aboutAction, SIGNAL(triggered()), this->aboutWindow, SLOT(show()));

@@ -20,7 +20,6 @@ HEADERS  += mainwindow.h\
     lib/qmenugen/loadmenu.h
 
 macx { 
-
     LIBS += -framework Cocoa
 
     QT += macextras

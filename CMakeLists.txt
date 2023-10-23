@@ -25,6 +25,7 @@ include_directories("${PROJECT_SOURCE_DIR}/lib/cocoainitializer/")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 
 list(APPEND QJSONIFY_HEADERS
@@ -51,9 +52,6 @@ list(APPEND QJSONIFY_RES
 )
 
 QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
-list(APPEND OTHER_TARGETS
-	menu_defs.json
-)
 
 if (APPLE)
 	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns )
@@ -93,9 +91,7 @@ if (APPLE)
 	set_target_properties(QJsonify PROPERTIES LINK_FLAGS
 		 "-Wl,-F/Library/Frameworks")
 	target_link_libraries(QJsonify stdc++
-		"-framework Foundation"
 		"-framework Cocoa"
-		"-framework AppKit"
 		objc
 	)
 else()
