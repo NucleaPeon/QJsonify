@@ -4,9 +4,11 @@ LoadMenu::LoadMenu()
 {
 }
 
-bool LoadMenu::loadFile()
+bool LoadMenu::loadFile(QUrl url)
 {
-    QFile file(":/filespecs/menu_defs.json");
+    QFile file(url.path());
+    if (! file.exists())
+        return false;
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QJsonParseError err;
         _json = QJsonDocument::fromJson(file.readAll(), &err);
@@ -23,11 +25,11 @@ bool LoadMenu::loadFile()
     return _loaded;
 }
 
-void LoadMenu::setupToolBarOn(QWidget *widget, QObject *slotobj)
+void LoadMenu::setupToolBarOn(QUrl definition, QWidget *widget, QObject *slotobj)
 {
     _action_map = QMap<QString, QAction*>();
     if (_loaded == false)
-        LoadMenu::loadFile();
+        LoadMenu::loadFile(definition);
 
     mb = setupMenus(widget);
 #ifdef Q_OS_MAC
@@ -38,11 +40,11 @@ void LoadMenu::setupToolBarOn(QWidget *widget, QObject *slotobj)
 #endif
 }
 
-void LoadMenu::setupToolBarOn(QMainWindow *window, QObject *slotobj)
+void LoadMenu::setupToolBarOn(QUrl definition, QMainWindow *window, QObject *slotobj)
 {
     _action_map = QMap<QString, QAction*>();
     if (_loaded == false)
-        LoadMenu::loadFile();
+        LoadMenu::loadFile(definition);
 
    mb = setupMenus(window);
    window->setMenuBar(mb);

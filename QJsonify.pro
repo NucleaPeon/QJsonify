@@ -13,11 +13,11 @@ ICON = qjsonify.icns
 SOURCES += main.cpp\
         mainwindow.cpp\
         about.cpp\
-        loadmenu.cpp
+        lib/qmenugen/loadmenu.cpp
 
 HEADERS  += mainwindow.h\
         about.h\
-        loadmenu.h
+    lib/qmenugen/loadmenu.h
 
 macx { 
 
@@ -25,8 +25,8 @@ macx {
 
     QT += macextras
 
-    OBJECTIVE_SOURCES += cocoainitializer.mm
-    OBJECTIVE_HEADERS += cocoainitializer.h
+    OBJECTIVE_SOURCES += lib/cocoainitializer/cocoainitializer.mm
+    OBJECTIVE_HEADERS += lib/cocoainitializer/cocoainitializer.h
 
 }
 
@@ -43,4 +43,5 @@ RESOURCES += \
     main.qrc
 
 OTHER_FILES += \
-    LICENSE
+    LICENSE \
+    menu_defs.json

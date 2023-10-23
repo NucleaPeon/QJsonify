@@ -22,7 +22,7 @@
 #include <QtPrintSupport>
 
 #include "about.h"
-#include "loadmenu.h"
+#include "lib/qmenugen/loadmenu.h"
 
 namespace Ui {
 class MainWindow;

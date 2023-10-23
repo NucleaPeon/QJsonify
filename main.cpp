@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <QIcon>
 #ifdef Q_OS_MAC
-#include "cocoainitializer.h"
+#include "lib/cocoainitializer/cocoainitializer.h"
 #endif
 
 int main(int argc, char *argv[])

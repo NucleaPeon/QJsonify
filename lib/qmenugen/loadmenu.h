@@ -10,6 +10,7 @@
 #include <QJsonValue>
 #include <QJsonParseError>
 #include <QFile>
+#include <QUrl>
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
@@ -49,9 +50,9 @@ class LoadMenu
 public:
     LoadMenu();
 
-    static bool loadFile();
-    static void setupToolBarOn(QWidget *widget = 0, QObject *slotobj = 0);
-    static void setupToolBarOn(QMainWindow *window = 0, QObject *slotobj = 0);
+    static bool loadFile(QUrl url);
+    static void setupToolBarOn(QUrl definition, QWidget *widget = 0, QObject *slotobj = 0);
+    static void setupToolBarOn(QUrl definition, QMainWindow *window = 0, QObject *slotobj = 0);
 
     /*!
      * \brief actionByName Retrieves a QAction based on name defined in the menu_defs.json
