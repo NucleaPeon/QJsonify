@@ -106,9 +106,16 @@ Clone the repo:
 
 You will need:
 * git
-* clang >= 3 OR g++ >= 4.2
-* make
-* Qt5 >= 5.3.2
+* cmake (for CMake builds)
+* clang >= 3 OR g++ >= 4.2 OR msvc 
+* make (OS X and Linux)
+* Qt5 >= 5.3.2 (Though 5.3.1 **may** also be acceptable)
+* For Windows 7:
+	* Visual Studio with MSBuild.exe on your ``PATH`` (I'm using VS 2013)
+	* Windows Driver Version kit (I'm using 7.1.0)
+	* Git Bash is useful for cli builds
+	* Ensure that Qt5_DIR environmental variable is set to something like ``C:\Qt\Qt5.3.1\5.3\msvc2013_opengl`` or ``C:\Qt\Qt5.3.2\5.3\msvc2013_64_opengl``
+	* Ensure your path to windeployqt is on ``PATH`` (``C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\Bin``)
 
 
 ### Installation
@@ -131,6 +138,42 @@ You will need:
     ```
 
     Then drag and drop the resulting QJsonify.app/ folder into your Applications folder.
+
+* For Windows 7 on Visual Studio 2013
+
+Easiest way is to open project in Qt Creator and build, then navigate to directory, copy over .dll's or run ``windeployqt QJsonify.exe``
+
+Slightly less easy way using ``qmake`` is:
+
+	```sh
+	qmake -r
+	jom.exe -f Makefile.Release
+	windeployqt QJsonify.exe
+	```
+	
+	or use VS nmake (not as optimized for multi-core)
+	
+	```sh
+	qmake -r
+	nmake.exe -f Makefile.Release
+	windeployqt QJsonify.exe
+	```
+	
+I couldn't get things to compile, so perhaps my environmental variables were not set up correctly.
+If you want to try the above method, you can view your Environmental Variables in Qt Creator -> Projects sidebar button
+
+For ``cmake`` use Git Bash on main project directory:
+
+	```sh
+	mkdir build
+	cd build
+	cmake ..
+	MSBuild.exe QJsonify.vcxproj
+	windeployqt QJsonify.exe
+	(Copy this directory or compress to zip and distribute)
+	```
+	
+Resulting file will be in something like ``QJsonify\build\Debug`` directory
 
 I recommend calling ``make`` with the option ``-jN`` where ``N`` is the number of cores of your cpu.
 

@@ -31,6 +31,16 @@ macx {
 
 win32 {
     QT += winextras
+	
+	# For easy results, use qtcreator. Don't try doing this on the command line unless you know what you are doing.
+	
+    # You may need to change this path to your installed DDK/Microsoft Windows SDK as well as 32/64 bit
+    #INCLUDEPATH += "C:/WinDDK/7600.16385.1/inc/crt" \
+    #    "C:/WinDDK/7600.16385.1/inc/api" \
+	#	"C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/include/utility" \
+	#	"C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/include/cliext/utility"
+
+    #LIBS += -L"C:/WinDDK/7600.16385.1/lib/Crt/i386"
 }
 
 

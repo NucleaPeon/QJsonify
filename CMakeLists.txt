@@ -12,8 +12,11 @@ if(APPLE)
 	find_package(Qt5 REQUIRED MacExtras)
 	set(BUILD_SHARED_LIBS OFF)
 elseif(MSVC)
-	find_package(Qt5 REQUIRED WinExtras)
+	find_package(Qt5 HINTS "$ENV{QT5_DIR}" COMPONENTS Core Quick REQUIRED)
+	set(Qt5_DIR "C:/Qt/Qt5.3.2/5.3/msvc2013_64_opengl/")
+	find_package(Qt5 COMPONENTS WinExtras REQUIRED)
 	set(BUILD_SHARED_LIBS OFF)
+	
 elseif(Q_OS_LINUX)
 	set(BUILD_SHARED_LIBS OFF)  # Maybe set to on in this one case?
 endif()
@@ -31,14 +34,12 @@ set(CMAKE_AUTORCC ON)
 list(APPEND QJSONIFY_HEADERS
 	mainwindow.h
 	about.h
-	lib/cocoainitializer/cocoainitializer.h
 	lib/qmenugen/loadmenu.h
 )
 
 list(APPEND QJSONIFY_SOURCES
 	mainwindow.cpp
 	about.cpp
-	lib/cocoainitializer/cocoainitializer.mm
 	lib/qmenugen/loadmenu.cpp
 )
 
@@ -57,6 +58,8 @@ if (APPLE)
 	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns )
 	set(APP_ICON "icons/${MACOSX_BUNDLE_ICON_FILE}")
 	list(APPEND OTHER_TARGETS ${APP_ICON})
+	list(APPEND QJSONIFY_SOURCES lib/cocoainitializer/cocoainitializer.mm)
+	list(APPEND QJSONIFY_HEADERS lib/cocoainitializer/cocoainitializer.h)
 	add_custom_target(OTHER_FILES SOURCES ${OTHER_TARGETS})
 	set_property(SOURCE ${APP_ICON} PROPERTY MACOSX_PACKAGE_LOCATION
 		${MACOSX_BUNDLE_ICON_FILE})
@@ -95,6 +98,9 @@ if (APPLE)
 		objc
 	)
 else()
+	if (MSVC)
+		set(CMAKE_PREFIX_PATH "C:\\Qt\\5.3.1\\5.3\\msvc2013_opengl")
+	endif()
 	add_executable(QJsonify
 		main.cpp
 		${QJSONIFY_HEADERS}
@@ -105,7 +111,6 @@ else()
 	)
 endif()
 target_link_libraries(QJsonify Qt5::Widgets Qt5::PrintSupport )
-
 if(MSVC)
-	target_link_libraries(QJsonify Qt5::WinExtras)
+	target_link_libraries(QJsonify Qt5::WinExtras Qt5::PrintSupport)
 endif()
