@@ -120,13 +120,24 @@ You will need:
 
 ### Installation
 
+**Note** I recommend calling ``make -jN`` where ``N`` is the number of cores of your cpu.
+
+<hr>
+
+* Using cmake on Linux or Mac:
+
+    ```sh
+	cd  build/
+	cmake ..
+	make
+	```
+
 * For linux:
 
     ```sh
     cd QJsonify
     qmake -r
     make
-    make install
     ```
 
 * For Mac:
@@ -143,7 +154,19 @@ You will need:
 
 Easiest way is to open project in Qt Creator and build, then navigate to directory, copy over .dll's or run ``windeployqt QJsonify.exe``
 
-Slightly less easy way using ``qmake`` is:
+For ``cmake`` use Git Bash on main project directory:
+
+	```sh
+	cd build
+	cmake ..
+	MSBuild.exe QJsonify.vcxproj
+	windeployqt QJsonify.exe
+	(Copy this directory or compress to zip and distribute)
+	```
+	
+Resulting file will be in something like ``QJsonify\build\Debug`` directory
+
+Slightly less easy way and one I'm not supporting is using ``qmake`` on the command line:
 
 	```sh
 	qmake -r
@@ -159,23 +182,9 @@ Slightly less easy way using ``qmake`` is:
 	windeployqt QJsonify.exe
 	```
 	
-I couldn't get things to compile, so perhaps my environmental variables were not set up correctly.
-If you want to try the above method, you can view your Environmental Variables in Qt Creator -> Projects sidebar button
-
-For ``cmake`` use Git Bash on main project directory:
-
-	```sh
-	mkdir build
-	cd build
-	cmake ..
-	MSBuild.exe QJsonify.vcxproj
-	windeployqt QJsonify.exe
-	(Copy this directory or compress to zip and distribute)
-	```
-	
-Resulting file will be in something like ``QJsonify\build\Debug`` directory
-
-I recommend calling ``make`` with the option ``-jN`` where ``N`` is the number of cores of your cpu.
+I couldn't get things to compile, so perhaps my environmental variables were not set up correctly. It would fail looking for "utility".
+If you want to try the above method, you can view your Environmental Variables in Qt Creator -> Projects sidebar button and make sure
+everything is set up correctly.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
