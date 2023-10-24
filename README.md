@@ -62,8 +62,8 @@
 ## About The Project
 
 [![QJsonify on Linux][product-screenshot-linux]](https://github.com/NucleaPeon/QJsonify)
-
 [![QJsonify on OS X Snow Leopard][product-screenshot-osx]](https://github.com/NucleaPeon/QJsonify)
+[![QJsonify on Windows 7][product-screenshot-win7]](https://github.com/NucleaPeon/QJsonify)
 
 _A Windows XP and 7 version are planned._
 
@@ -203,3 +203,4 @@ Thanks to the <a href="https://github.com/othneildrew/Best-README-Template">http
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [product-screenshot-linux]: images/qjsonify-linux.png
 [product-screenshot-osx]: images/qjsonify-osx.png
+[product-screenshot-win7]: images/qjsonify-win7.png

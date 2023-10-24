@@ -26,9 +26,7 @@
 #include <QWinThumbnailToolBar>
 #endif
 
-#ifdef Q_OS_LINUX
 #include <QToolBar>
-#endif
 
 /*!
  * \brief The LoadMenu class is a file spec loader for menu setup.
@@ -63,12 +61,9 @@ public:
 
     static QMenuBar *setupMenus(QWidget *widget);
 #ifdef Q_OS_WIN
-    // UNTESTED
-    static QWinThumbnailToolBar* setupWindowsToolBar(QWidget *widget, QObject *slotobj);
+    // static QWinThumbnailToolBar* setupWindowsToolBar(QWidget *widget, QObject *slotobj);
 #endif
-#ifdef Q_OS_LINUX
-    static QToolBar* setupNixToolBar(QWidget *widget, QObject *slotobj);
-#endif
+    static QToolBar* setupDefaultToolBar(QWidget *widget, QObject *slotobj);
 #ifdef Q_OS_MAC
     static QMacToolBar* setupOSXToolBar(QWidget *widget, QObject *slotobj);
     static QMacToolBarItem* toolBarItemByText(QString text);

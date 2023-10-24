@@ -34,9 +34,9 @@ void LoadMenu::setupToolBarOn(QFile* definition, QWidget *widget, QObject *sloto
     mb = setupMenus(widget);
 #ifdef Q_OS_MAC
     tb = setupOSXToolBar(widget, slotobj);
-#endif
-#ifdef Q_OS_LINUX
-    tb = setupNixToolBar(widget, slotobj);
+#else
+    tb = setupDefaultToolBar(widget, slotobj);
+    // TODO: If windows and windows version >= 7, there should be an option to set up the QWinThumbnailToolBar
 #endif
 }
 
@@ -50,9 +50,8 @@ void LoadMenu::setupToolBarOn(QFile *definition, QMainWindow *window, QObject *s
    window->setMenuBar(mb);
 #ifdef Q_OS_MAC
     tb = setupOSXToolBar(window, slotobj);
-#endif
-#ifdef Q_OS_LINUX
-    tb = setupNixToolBar(window, slotobj);
+#else
+    tb = setupDefaultToolBar(window, slotobj);
     window->addToolBar(tb);
 #endif
 }
@@ -102,19 +101,19 @@ QMenuBar* LoadMenu::setupMenus(QWidget *widget)
     return mb;
 }
 #ifdef Q_OS_WIN
-QWinThumbnailToolBar* LoadMenu::setupWindowsToolBar(QWidget *widget, QObject *slotobj)
-{
-    QJsonArray arr = _json.array();
-    foreach(QJsonValue val, arr) {
-        qWarning("TODO: Windows Ribbon Toolbar");
-    }
-}
+//QWinThumbnailToolBar* LoadMenu::setupWindowsToolBar(QWidget *widget, QObject *slotobj)
+//{
+//    QJsonArray arr = _json.array();
+//    foreach(QJsonValue val, arr) {
+//        qWarning("TODO: Windows Ribbon Toolbar");
+//    }
+
+//}
 #endif
-#ifdef Q_OS_LINUX
-QToolBar* LoadMenu::setupNixToolBar(QWidget *widget, QObject *slotobj)
+QToolBar* LoadMenu::setupDefaultToolBar(QWidget *widget, QObject *slotobj)
 {
     QJsonArray arr = _json.array();
-    QToolBar *tb = new QToolBar(widget);
+    QToolBar *tb = new QToolBar(QObject::tr("Main Toolbar"), widget);
 
     foreach(QJsonValue val, arr) {
         // QActions already set up and configured
@@ -139,7 +138,6 @@ QToolBar* LoadMenu::setupNixToolBar(QWidget *widget, QObject *slotobj)
     }
     return tb;
 }
-#endif
 
 #ifdef Q_OS_MAC
 QMacToolBar* LoadMenu::setupOSXToolBar(QWidget *widget, QObject *slotobj)
