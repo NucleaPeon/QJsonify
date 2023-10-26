@@ -24,7 +24,6 @@ endif()
 
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories("${PROJECT_SOURCE_DIR}/lib/qmenugen/")
-include_directories("${PROJECT_SOURCE_DIR}/lib/cocoainitializer/")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -52,7 +51,14 @@ list(APPEND QJSONIFY_RES
 	main.qrc
 )
 
-QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
+if (APPLE)
+        include_directories("${PROJECT_SOURCE_DIR}/lib/cocoainitializer/")
+	list(APPEND QJSONIFY_HEADERS lib/cocoainitializer/cocoainitializer.h)
+	list(APPEND QJSONIFY_SOURCES lib/cocoainitializer/cocoainitializer.mm)
+endif()
+
+
+# QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
 
 if (APPLE)
 	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns )
@@ -112,5 +118,6 @@ else()
 endif()
 target_link_libraries(QJsonify Qt5::Widgets Qt5::PrintSupport )
 if(MSVC)
-	target_link_libraries(QJsonify Qt5::WinExtras Qt5::PrintSupport)
+	target_link_libraries(QJsonify Qt5::WinExtras)
+	QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
 endif()
