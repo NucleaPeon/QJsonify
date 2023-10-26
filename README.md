@@ -154,17 +154,28 @@ You will need:
 
 Easiest way is to open project in Qt Creator and build, then navigate to directory, copy over .dll's or run ``windeployqt QJsonify.exe``
 
-For ``cmake`` use Git Bash on main project directory:
+For ``cmake`` use Git Bash on main project directory. This will build the Debug release by default:
 
 	```sh
 	cd build
 	cmake ..
 	MSBuild.exe QJsonify.vcxproj
-	windeployqt QJsonify.exe
+	windeployqt Debug/QJsonify.exe
 	(Copy this directory or compress to zip and distribute)
 	```
 	
-Resulting file will be in something like ``QJsonify\build\Debug`` directory
+From what I've read and the cli errors I got, the way to build a Release version is:
+
+	```sh
+	cd build
+	cmake ..
+	# Define Debug or Release for build type. "//" to specify an option is required for git bash, but not cmd.exe or powershell.
+	MSBuild.exe QJsonify.sln //p:Configuration="Debug"
+	windeployqt Debug/QJsonify.exe
+	```
+	
+Compress the Release/ or Debug/ directory and distribute.
+	
 
 Slightly less easy way and one I'm not supporting is using ``qmake`` on the command line:
 
