@@ -122,6 +122,8 @@ You will need:
 
 **Note** I recommend calling ``make -jN`` where ``N`` is the number of cores of your cpu.
 
+**Additional Note**: Windows is currently the only statically built version of this Software. For OS X and Linux, you will need Qt5 installed to run it.
+
 <hr>
 
 * Using cmake on Linux or Mac:
