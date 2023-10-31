@@ -90,7 +90,7 @@
            </font>
           </property>
           <property name="text">
-           <string>QJsonify 1.0.1</string>
+           <string>QJsonify 1.1.1</string>
           </property>
          </widget>
         </item>

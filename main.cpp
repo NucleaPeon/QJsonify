@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon(":/icons/qjsonify-64x64.png"));
 #endif
     a.setApplicationName(QObject::tr("QJsonify"));
-    a.setApplicationVersion("1.0.1");
+    a.setApplicationVersion("1.1.1");
     MainWindow w;
     w.show();
 
