@@ -121,3 +121,6 @@ if(MSVC)
 	target_link_libraries(QJsonify Qt5::WinExtras)
 	QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
 endif()
+
+install(TARGETS QJsonify)
+
