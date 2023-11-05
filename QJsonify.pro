@@ -6,18 +6,19 @@
 
 QT       += core widgets printsupport
 
+CONFIG += qt
+CONFIG += static
+
 TARGET = QJsonify
 TEMPLATE = app
 ICON = qjsonify.icns
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-        about.cpp\
-        lib/qmenugen/loadmenu.cpp
+        about.cpp
 
 HEADERS  += mainwindow.h\
-        about.h\
-    lib/qmenugen/loadmenu.h
+        about.h
 
 macx { 
     LIBS += -framework Cocoa

@@ -23,7 +23,7 @@
 #include <QFileInfo>
 
 #include "about.h"
-#include "lib/qmenugen/loadmenu.h"
+#include <qt5menugen.h>
 
 namespace Ui {
 class MainWindow;

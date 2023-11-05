@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.3)
 project(QJsonify
-        VERSION 1.1.1
-        LANGUAGES CXX)
+        VERSION 1.2.0
+        LANGUAGES CXX
+        DESCRIPTION "Prettify and Minify your JSON files locally")
 
 find_package(Qt5 REQUIRED
     PrintSupport
@@ -16,14 +17,13 @@ elseif(MSVC)
 	set(Qt5_DIR "C:/Qt/Qt5.3.2/5.3/msvc2013_64_opengl/")
 	find_package(Qt5 COMPONENTS WinExtras REQUIRED)
 	set(BUILD_SHARED_LIBS OFF)
-	
+
 elseif(Q_OS_LINUX)
 	set(BUILD_SHARED_LIBS OFF)  # Maybe set to on in this one case?
 endif()
 
 
 include_directories(${PROJECT_SOURCE_DIR})
-include_directories("${PROJECT_SOURCE_DIR}/lib/qmenugen/")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -33,13 +33,11 @@ set(CMAKE_AUTORCC ON)
 list(APPEND QJSONIFY_HEADERS
 	mainwindow.h
 	about.h
-	lib/qmenugen/loadmenu.h
 )
 
 list(APPEND QJSONIFY_SOURCES
 	mainwindow.cpp
 	about.cpp
-	lib/qmenugen/loadmenu.cpp
 )
 
 list(APPEND QJSONIFY_UIS
@@ -52,17 +50,9 @@ list(APPEND QJSONIFY_RES
 )
 
 if (APPLE)
-        include_directories("${PROJECT_SOURCE_DIR}/lib/cocoainitializer/")
-	list(APPEND QJSONIFY_HEADERS lib/cocoainitializer/cocoainitializer.h)
-	list(APPEND QJSONIFY_SOURCES lib/cocoainitializer/cocoainitializer.mm)
-endif()
-
-
-# QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
-
-if (APPLE)
 	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns )
 	set(APP_ICON "icons/${MACOSX_BUNDLE_ICON_FILE}")
+	include_directories("${PROJECT_SOURCE_DIR}/lib/cocoainitializer/")
 	list(APPEND OTHER_TARGETS ${APP_ICON})
 	list(APPEND QJSONIFY_SOURCES lib/cocoainitializer/cocoainitializer.mm)
 	list(APPEND QJSONIFY_HEADERS lib/cocoainitializer/cocoainitializer.h)
@@ -117,6 +107,7 @@ else()
 	)
 endif()
 target_link_libraries(QJsonify Qt5::Widgets Qt5::PrintSupport )
+target_link_libraries(QJsonify qt5menugen)
 if(MSVC)
 	target_link_libraries(QJsonify Qt5::WinExtras)
 	QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )

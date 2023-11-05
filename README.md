@@ -65,11 +65,15 @@
 [![QJsonify on OS X Snow Leopard][product-screenshot-osx]](https://github.com/NucleaPeon/QJsonify)
 [![QJsonify on Windows 7][product-screenshot-win7]](https://github.com/NucleaPeon/QJsonify)
 
-_A Windows XP and 7 version are planned._
+_A Windows XP is planned._
 
 QJsonify is a project that aims to help developers keep their data local. There are many great online JSON minifiers and prettifiers, but all that functionality is easily accessible within the Qt5 Framework and this avoids submitting data across the network.
 
 It's faster and more secure, you can toggle quickly between minified and prettified forms as well as print and export said json files in a couple clicks.
+
+**Starting at v1.2.0, support for qmake is being dropped.**
+
+### Oxygen Icon Licensing
 
 This project includes Oxygen Icons <a href="https://techbase.kde.org/Projects/Oxygen/Licensing">https://techbase.kde.org/Projects/Oxygen/Licensing</a> which are licensed under the LGPL v3 (see LICENSE-LGPL3 file). All files under this license are located in the ``icons/`` directory except jsonify-* files which I created for the program logo. These also can be licensed under the LGPL v3.
 
@@ -96,18 +100,17 @@ It is also tested using Qt5.15 on Linux amd64.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Clone the repo:
+Starting at version 1.2.0, we depend on qt5menugen: a library that handles dynamic .json-based menu and toolbar generation. It was partially developed in this application (and others of mine) before being split into its own library.
+Use version 1.1.0 if you want it all included, but there will be no support/added features going forward.
 
-```sh
-    git clone https://github.com/NucleaPeon/QJsonify.git
-```
+_Windows users should use either the v1.1.0 release or source until I figure out how cmake building libraries on Windows works and can add instructions for that._
 
 ### Prerequisites
 
 You will need:
 * git
 * cmake (for CMake builds)
-* clang >= 3 OR g++ >= 4.2 OR msvc 
+* clang >= 3 OR g++ >= 4.2 OR msvc
 * make (OS X and Linux)
 * Qt5 >= 5.3.2 (Though 5.3.1 **may** also be acceptable)
 * For Windows 7:
@@ -120,7 +123,22 @@ You will need:
 
 ### Installation
 
-**Note** I recommend calling ``make -jN`` where ``N`` is the number of cores of your cpu.
+Clone and install the library repo:
+
+```sh
+    git clone https://github.com/NucleaPeon/qt5menugen.git
+    cd qt5menugen/build
+    cmake ..
+    make -j2
+    sudo make install
+```
+
+Clone and install QJsonify
+
+```sh
+    git clone https://github.com/NucleaPeon/QJsonify.git
+    cd QJsonify/build
+```
 
 **Additional Note**: Windows is currently the only statically built version of this Software. For OS X and Linux, you will need Qt5 installed to run it.
 
@@ -129,30 +147,16 @@ You will need:
 * Using cmake on Linux or Mac:
 
     ```sh
-	cd  build/
 	cmake ..
 	make
 	```
 
-* For linux:
-
-    ```sh
-    cd QJsonify
-    qmake -r
-    make
-    ```
-
-* For Mac:
-
-    ```sh
-    cd QJsonify
-    qmake -r
-    make
-    ```
-
-    Then drag and drop the resulting QJsonify.app/ folder into your Applications folder.
+	Mac users should have a .app/ folder they can click on to run in the ``build/`` directory. To install: drag to your Applications folder.
+	Linux users can optionally run ``sudo make install`` to install it.
 
 * For Windows 7 on Visual Studio 2013
+
+**v1.2.0 uses a library dependency. This is only for v1.1.0.**
 
 Easiest way is to open project in Qt Creator and build, then navigate to directory, copy over .dll's or run ``windeployqt QJsonify.exe``
 
@@ -164,29 +168,8 @@ For ``cmake`` use Git Bash on main project directory. Not specifying the ``Confi
 	MSBuild.exe QJsonify.sln //p:Configuration="Debug"
 	windeployqt Debug/QJsonify.exe
 	```
-	
+
 Compress the Release/ or Debug/ directory and distribute.
-	
-
-Slightly less easy way and one I'm not supporting is using ``qmake`` on the command line:
-
-	```sh
-	qmake -r
-	jom.exe -f Makefile.Release
-	windeployqt QJsonify.exe
-	```
-	
-	or use VS nmake (not as optimized for multi-core)
-	
-	```sh
-	qmake -r
-	nmake.exe -f Makefile.Release
-	windeployqt QJsonify.exe
-	```
-	
-I couldn't get things to compile, so perhaps my environmental variables were not set up correctly. It would fail looking for "utility".
-If you want to try the above method, you can view your Environmental Variables in Qt Creator -> Projects sidebar button and make sure
-everything is set up correctly.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

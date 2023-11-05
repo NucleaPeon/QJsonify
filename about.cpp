@@ -6,6 +6,8 @@ About::About(QWidget *parent) :
     ui(new Ui::About)
 {
     ui->setupUi(this);
+    const QString version = QString("Version %1").arg(qApp->applicationVersion());
+ 	ui->labelVersionString->setText(version);
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(close()));
 }
 

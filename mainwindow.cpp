@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
     this->defaultLocation = QUrl(QDir::homePath());
     QFile def(":/filespecs/menu_defs.json");
-    LoadMenu::setupToolBarOn(&def, this, this);
+    QtMenuGen::setupToolBarOn(&def, this, this);
     connect(this->aboutAction, SIGNAL(triggered()), this->aboutWindow, SLOT(show()));
 
     this->statusBar = new QStatusBar();
@@ -140,7 +140,7 @@ void MainWindow::loadInputFile(QUrl input)
             QStringList enableThese;
             enableThese << "minify" << "prettify" << "export";
             foreach(const QString actionName, enableThese) {
-                QAction *act = LoadMenu::actionByName(actionName);
+                QAction *act = QtMenuGen::actionByName(actionName);
                 if (act != NULL)
                     act->setEnabled(true);
             }
