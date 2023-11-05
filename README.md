@@ -162,13 +162,13 @@ Easiest way is to open project in Qt Creator and build, then navigate to directo
 
 For ``cmake`` use Git Bash on main project directory. Not specifying the ``Configuration`` parameter will build the Debug release by default:
 
-	```sh
-	cd build
-	cmake ..
-	# Define Debug or Release for build type. "//" to specify an option is required for git bash, but only "/" for cmd.exe or powershell.
-	MSBuild.exe QJsonify.sln //p:Configuration="Debug"
-	windeployqt Debug/QJsonify.exe
-	```
+```sh
+cd build
+cmake ..
+# Define Debug or Release for build type. "//" to specify an option is required for git bash, but only "/" for cmd.exe or powershell.
+MSBuild.exe QJsonify.sln //p:Configuration="Debug"
+windeployqt Debug/QJsonify.exe
+```
 
 Compress the Release/ or Debug/ directory and distribute.
 
