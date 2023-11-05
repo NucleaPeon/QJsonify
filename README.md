@@ -189,10 +189,13 @@ Compress the Release/ or Debug/ directory and distribute.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Remote file read and write
+- [ ] Remove qmake files
 - [ ] Compile for, and add Windows 7 binary
+- [ ] Compile for, and add Windows XP binary
+- [ ] Compile static releases for all supported operating systems
+- [ ] Remote file read and write
 - [ ] Implement Recent Files menu and have ability to clear it
-- [ ] Use CMake as the build system instead of qmake
+- [X] Use CMake as the build system instead of qmake
 - [ ] Create a debian release package
 - [ ] Show statistics between prettified and minified file sizes
 - [ ] Have an editor button to allow system editor to edit json file
