@@ -194,6 +194,7 @@ Compress the Release/ or Debug/ directory and distribute.
 - [ ] Compile for, and add Windows XP binary
 - [ ] Compile static releases for all supported operating systems
 - [ ] Remote file read and write
+- [ ] Add to Gentoo Guru repository
 - [ ] Implement Recent Files menu and have ability to clear it
 - [X] Use CMake as the build system instead of qmake
 - [ ] Create a debian release package
