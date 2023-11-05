@@ -161,6 +161,7 @@ Clone and install QJsonify
 Easiest way is to open project in Qt Creator and build, then navigate to directory, copy over .dll's or run ``windeployqt QJsonify.exe``
 
 For ``cmake`` use Git Bash on main project directory. Not specifying the ``Configuration`` parameter will build the Debug release by default:
+
 	```sh
 	cd build
 	cmake ..
