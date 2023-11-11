@@ -70,6 +70,7 @@ if (APPLE)
 		${QJSONIFY_RES}
 
 	)
+
 	target_sources(QJsonify PRIVATE
 		${OTHER_TARGETS}
 	)
@@ -113,5 +114,9 @@ if(MSVC)
 	QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
 endif()
 
-install(TARGETS QJsonify)
+if(APPLE)
+	install(TARGETS QJsonify BUNDLE DESTINATION ${CMAKE_SOURCE_DIR})
+else()
+	install(TARGETS QJsonify)
+endif()
 

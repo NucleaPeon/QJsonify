@@ -11,6 +11,7 @@
 #include <QFlags>
 #include <QDir>
 #include <QFile>
+#include <QSplitter>
 
 #include <QJsonParseError>
 #include <QJsonDocument>
