@@ -48,6 +48,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QtMenuGen* menugen;
     QAction *aboutAction;
     QAction *preferencesAction;
     QAction *fileOpen;

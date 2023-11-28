@@ -8,6 +8,8 @@ find_package(Qt5 REQUIRED
     PrintSupport
     Widgets
 )
+# Version 2.0.1 is when find_package() is supported.
+find_package(qt5menugen CONFIG REQUIRED 2.0.1)
 
 if(APPLE)
 	find_package(Qt5 REQUIRED MacExtras)
@@ -48,7 +50,6 @@ list(APPEND QJSONIFY_UIS
 list(APPEND QJSONIFY_RES
 	main.qrc
 )
-
 if (APPLE)
 	set(MACOSX_BUNDLE_ICON_FILE qjsonify.icns )
 	set(APP_ICON "icons/${MACOSX_BUNDLE_ICON_FILE}")
@@ -68,7 +69,6 @@ if (APPLE)
 		${QJSONIFY_SOURCES}
 		${QJSONIFY_UIS}
 		${QJSONIFY_RES}
-
 	)
 
 	target_sources(QJsonify PRIVATE
@@ -109,6 +109,7 @@ else()
 endif()
 target_link_libraries(QJsonify Qt5::Widgets Qt5::PrintSupport )
 target_link_libraries(QJsonify qt5menugen)
+
 if(MSVC)
 	target_link_libraries(QJsonify Qt5::WinExtras)
 	QT5_WRAP_UI( UI_HEADERS ${QJSONIFY_UIS} )
